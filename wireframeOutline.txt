@@ -1,0 +1,23 @@
+Name: Brendan Angelo
+Project Title: Better Gaming Groups
+Project Stack: Java
+GitHub Repo Link: https://github.com/bcangelo12/SoloProject-CodingDojo
+
+Project Description:
+
+I am hoping to build a webapp that can be used to coordinate with like-minded gamers to bring people together through anonymous or real name interactions. When users sign up they can give a preferred genre of games they like to play, and will be able to view all other signed up users and their preferred genres. When the users finds someone they might want to reach out to, they can see a detailed user page filled out by that user to see if they will get along. They can then add them as a friend, which will be displayed in their own profile page.
+
+New Programming Concepts I want to include: 
+
+Allowing users to give as much or little information they desire, provide ways to contact users that are friends, integrate profiles from widely used gaming platforms for easy communication and linking out to their platform specific profiles.
+
+Week 1 Features:
+-Build out pages and routes
+-Login/Registration validations running, including edit pages
+-Friending system, unlocking access to email for communication purposes after establishing friendship
+
+Week 2 Features:
+-CSS work using Bootstrap
+
+Product Backlog:
+-Integrating platform APIs to allow users to sync accounts with their Profiles for easy linking to their preferred platforms
