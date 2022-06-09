@@ -5,7 +5,7 @@ GitHub Repo Link: https://github.com/bcangelo12/SoloProject-CodingDojo
 
 Project Description:
 
-I am hoping to build a webapp that can be used to coordinate with like-minded gamers to bring people together through anonymous or real name interactions. When users sign up they can give a preferred genre of games they like to play, and will be able to view all other signed up users and their preferred genres. When the users finds someone they might want to reach out to, they can see a detailed user page filled out by that user to see if they will get along. They can then add them as a friend, which will be displayed in their own profile page.
+I am hoping to build a webapp that can be used to coordinate with like-minded gamers to bring people together through anonymous or real name interactions. When users sign up they can give a preferred genre of games they like to play, and will be able to view all other signed up users and their preferred genres. When the users finds someone they might want to reach out to, they can see a detailed user page filled out by that user to see if they will get along. They can then add them as a friend, which will be displayed in their own profile page. Users will also be able to leave messages on friend's profiles that can be viewed by other users, and edited or deleted by the poster.
 
 New Programming Concepts I want to include: 
 
@@ -18,6 +18,7 @@ Week 1 Features:
 
 Week 2 Features:
 -CSS work using Bootstrap
+-Get message system stable on user profiles
 
 Product Backlog:
 -Integrating platform APIs to allow users to sync accounts with their Profiles for easy linking to their preferred platforms
