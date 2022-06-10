@@ -37,7 +37,9 @@ public class HomeController {
 		userServ.register(newUser, result);
 		if(result.hasErrors()) {
 			model.addAttribute("newLogin",new LoginUser());
+			return "index.jsp";
 		}
+		session.setAttribute("loggedInUser", newUser);
 		return "redirect:/hub";
 	}
 	
@@ -78,19 +80,25 @@ public class HomeController {
 	public String editProfile(@PathVariable("id") Long id, Model model, HttpSession session, User user) {
 		if(session.getAttribute("loggedInUser")!=null) {
 			User profile = (User)session.getAttribute("loggedInUser");
-			model.addAttribute("user",profile);
+			model.addAttribute("editUser",profile);
 			return "editProfile.jsp";
 		}
 		return "redirect:/";
 	}
 	
 	@PutMapping("/members/update/{id}")
-	public String updateProfile(@Valid @PathVariable("id") @ModelAttribute("editProfile") User updateUser, BindingResult result) {
+	public String updateProfile(@Valid @ModelAttribute("editUser") User updateUser, BindingResult result) {
 		if(result.hasErrors()) {
 			return "editProfile.jsp";
 		} else {
 			userServ.updateUser(updateUser);
-			return "redirect:/hub";
+			return "redirect:/members/{id}";
 		}
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 }

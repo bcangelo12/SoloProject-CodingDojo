@@ -26,6 +26,10 @@ public class User {
 	@Size(min=1,message="A last name must have at least 1 character.")
 	private String lastName;
 	
+	@NotEmpty(message="A screen name is needed for registration!")
+	@Size(min=1,message="A screen name must have at least 1 character.")
+	private String screenName;
+
 	@NotEmpty(message="An email is required for registration!")
 	@Email(message="Please enter a valid email address!")
 	private String email;
@@ -78,6 +82,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+	
+	public String getScreenName() {
+		return screenName;
+	}
+
+	public void setScreenName(String screenName) {
+		this.screenName = screenName;
 	}
 
 	public String getEmail() {
