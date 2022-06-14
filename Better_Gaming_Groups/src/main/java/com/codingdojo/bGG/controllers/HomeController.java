@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import com.codingdojo.bGG.models.LoginUser;
+import com.codingdojo.bGG.models.Message;
 import com.codingdojo.bGG.models.User;
+import com.codingdojo.bGG.services.MessageService;
 import com.codingdojo.bGG.services.UserService;
 
 @Controller
@@ -22,6 +24,9 @@ public class HomeController {
 	
 	@Autowired
 	private UserService userServ;
+	
+	@Autowired
+	private MessageService messageServ;
 	
 	// Login page
 	@GetMapping("/")
@@ -70,6 +75,7 @@ public class HomeController {
 	public String showMember(@PathVariable("id") Long id, Model model, HttpSession session) {
 		if(session.getAttribute("loggedInUser")!=null) {
 			model.addAttribute("member",userServ.findById(id));
+			model.addAttribute("message", messageServ.getMessage(id));
 			return "showMember.jsp";
 		}
 		return "redirect:/";
@@ -86,6 +92,7 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
+	// Update Profile Page
 	@PutMapping("/members/update/{id}")
 	public String updateProfile(@Valid @ModelAttribute("editUser") User updateUser, BindingResult result) {
 		if(result.hasErrors()) {
@@ -95,6 +102,31 @@ public class HomeController {
 			return "redirect:/members/{id}";
 		}
 	}
+	
+	// New Message
+	@GetMapping("/messages/new")
+	public String newMessage(@ModelAttribute("message") Message message, HttpSession session, Model model) {
+		if(session.getAttribute("loggedInUser")!=null) {
+			User user = (User)session.getAttribute("loggedInUser");
+			model.addAttribute("user",user);
+			model.addAttribute("newMessage", new Message());
+			return "newMessage.jsp";
+		}
+		return "redirect:/";
+	}
+	
+	// Create Message
+	@PostMapping("/create/message")
+	public String createMessage(@Valid @PathVariable("id") @ModelAttribute("newMessage") Message newMessage, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "newMessage.jsp";
+		} else {
+			messageServ.createMessage(newMessage);
+			return "redirect:/members/{id}";
+		}
+	}
+	
+	//
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {

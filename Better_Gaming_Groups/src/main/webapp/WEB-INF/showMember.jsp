@@ -68,6 +68,29 @@
 			<h3>Platforms I'm on: Nothing specific!</h3>
 		</c:otherwise>
 		</c:choose>
+		<c:choose>
+		<c:when test="${member.messages!=null}">
+		<table class="table table-hover table-info">
+			<thead>
+				<tr>
+					<th>Message</th>
+					<th>Left By:</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="message" items="${messages}">
+				<tr>
+					<td>${message.message}</td>
+					<td>${message.member.screenName}</td>
+				</c:forEach>
+			</tbody>
+		</table>
+		</c:when>
+		<c:otherwise>
+			<h3>No messages yet!</h3>
+		</c:otherwise>
+		</c:choose>
+		<a href="/messages/new" class="btn btn-info my-2">Leave A Message!</a>
 		<c:if test="${member.id==loggedInUser.id}">
 			<a href="/members/edit/${member.id}" class="btn btn-warning my-2">Edit Profile</a>
 		</c:if>
