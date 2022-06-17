@@ -45,9 +45,10 @@ public class User {
 	@Size(min=8,max=128,message="The password must have at least 8 characters!")
 	private String password;
 	
-	@Transient
+	
 	@NotEmpty(message="Must input password again for confirmation!")
 	@Size(min=8,max=128,message="The confirm password must have at least 8 characters!")
+	@Transient
 	private String confirm;
 	
 	@Size(min=4,max=30,message="When editing your Profile Welcome Message, please include at least 4 characters!")
@@ -62,6 +63,7 @@ public class User {
 	@Size(min=3,message="Please tell everyone more about yourself, if you're comfortable!")
 	private String aboutMe;
 	
+	@Size(min=2, message="Let people know your preferred platform!")
 	private String platform;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)

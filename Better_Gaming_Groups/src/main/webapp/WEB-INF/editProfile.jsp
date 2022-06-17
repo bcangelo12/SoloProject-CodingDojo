@@ -13,9 +13,20 @@
 <title>Edit Your Character</title>
 </head>
 <body>
-	<div class="d-flex container col-6 justify-content-center align-items-center flex-column">
+	<div class="d-flex justify-content-end">
+		<a href="/hub" class="btn btn-primary my-2 mx-2">Back to the Hub</a>
+		<a href="/logout" class="btn btn-danger my-2 me-2">Logout</a>
+	</div>
+	<div class="d-flex container justify-content-center align-items-center flex-column">
 		<h1>Edit Your Profile</h1>
-			<form:form action="/members/update/${editProfile.id}" method="put" modelAttribute="editUser" class="form-group">
+			<form:form action="/members/update/${editUser.id}" method="put" modelAttribute="editUser" class="form-group col-6">
+				<div class="row mb-3">
+					<form:label path="screenName">Screen Name:</form:label>
+					<div class="col-sm-10">
+						<form:errors path="screenName" class="text-danger"/>
+						<form:input path="screenName" class="form-control"/>
+					</div>
+				</div>
 				<form:label path="screenName">Screen Name:</form:label>
 				<form:errors path="screenName" class="text-danger"/>
 				<form:input path="screenName" class="form-control"/>
@@ -34,10 +45,11 @@
 				<form:label path="aboutMe">About Me:</form:label>
 				<form:errors path="aboutMe" class="text-danger"/>
 				<form:textarea path="aboutMe" class="form-control"/>
+				<form:label path="platform">Platforms I play:</form:label>
+				<form:errors path="platform" class="text-danger"/>
+				<form:input path="platform" class="form-control"/>
 				<input type="submit" class="btn btn-success my-2" value="Update Your Profile">
 				<a href="/members/${loggedInUser.id}" class="btn btn-warning">Cancel</a>
-				<a href="/hub">Back to the Hub</a>
-				<a href="/logout">Logout</a>
 			</form:form>
 	</div>
 </body>

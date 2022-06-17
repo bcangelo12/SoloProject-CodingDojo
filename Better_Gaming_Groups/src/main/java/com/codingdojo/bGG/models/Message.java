@@ -23,6 +23,8 @@ public class Message {
 	@Size(min=5,message="A message must contain at least 5 characters to post!")
 	private String content;
 	
+	private Integer receiver;
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	private User user;
@@ -50,6 +52,15 @@ public class Message {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public Number getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(Integer receiver) {
+		this.receiver = receiver;
+	}
+
 	
 	
 }

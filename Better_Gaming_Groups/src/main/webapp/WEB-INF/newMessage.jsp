@@ -20,6 +20,7 @@
 				<form:errors path="content" class="text-danger"/>
 				<form:input path="content" class="form-control"/>
 				<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
+				<form:input type="hidden" path="receiver" value="${receiver.id}" class="form-control"/>
 				<input type="submit" class="btn btn-success my-2" value="Leave Your Message!">
 			</form:form>
 			<a href="/hub">Back to the Hub</a>

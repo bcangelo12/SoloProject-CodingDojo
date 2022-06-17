@@ -10,16 +10,22 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+<style>
+	body {background-image: url('/img/hub_bg.png'); background-size: cover; background-repeat: no-repeat;}
+</style>
 <title>The Hub</title>
 </head>
 <body>
+	<div class="d-flex justify-content-end">
+		<a href="/logout" class="btn btn-danger my-2">Logout</a>
+	</div>
 	<div class="d-flex container flex-column">
-		<div class="d-flex flex-column justify-content-end"><a href="/logout">Logout</a></div>
-		<div class="container justify-content-center align-items-center flex-column d-flex">
-		<h1>The Hub</h1>
+		<div class="container justify-content-center align-items-center flex-column d-flex text-light text-center">
+		<h1>The Hub</h1> 
 		<h2>Welcome in <c:out value="${loggedInUser.screenName}"></c:out>!</h2>
 		<h3>Find some amazing gamers to connect with!</h3>
-		<table class="table table-hover table-dark">
+		<table class="table table-hover table-info opacity-75">
 			<thead>
 				<tr>
 					<th>Screen Name</th>
@@ -30,7 +36,7 @@
 			<tbody>
 				<c:forEach var="member" items="${members}">
 				<tr>
-					<td><a href="/members/${member.id}">${member.screenName}</a></td>
+					<td><a class="text-danger" href="/members/${member.id}">${member.screenName}</a></td>
 					<td>${member.preferredGenre}</td>
 					<td>${member.aboutMe}</td>
 				</tr>

@@ -12,6 +12,10 @@
 <title>Character Sheet</title>
 </head>
 <body>
+	<div class="d-flex justify-content-end">
+		<a href="/hub" class="btn btn-primary my-2 mx-2">Back to the Hub</a>
+		<a href="/logout" class="btn btn-danger my-2 me-2">Logout</a>
+	</div>
 	<div class="d-flex container flex-column justify-content-center align-items-center col-6">
 		<h1><c:out value="${member.screenName}"></c:out></h1>
 		<c:choose>
@@ -47,7 +51,7 @@
 			<h3>About Me! Just give me some time, I'll be sure to change this!</h3>
 		</c:otherwise>
 		</c:choose>
-		<h3>Friends I've Made:</h3>
+		<!-- <h3>Friends I've Made:</h3> -->
 		<%-- <c:choose>
 		<c:when test="${member.!=null}">
 		<ul>
@@ -70,18 +74,33 @@
 		</c:choose>
 		<c:choose>
 		<c:when test="${member.messages!=null}">
-		<table class="table table-hover table-info">
+		<table class="table table-hover table-info table-bordered text-center">
 			<thead>
 				<tr>
 					<th>Message</th>
 					<th>Left By:</th>
+					<th>Actions:</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="message" items="${messages}">
+				<c:if test="${member.id==message.receiver}">
 				<tr>
-					<td>${message.message}</td>
-					<td>${message.member.screenName}</td>
+					<td>${message.content}</td>
+					<td>${message.user.screenName}</td>
+					<c:choose>
+					<c:when test="${loggedInUser.id==message.user.id}">
+					<td>
+						<a href="/messages/edit/${message.id}" class="btn btn-warning mx-2">Edit</a>
+						<a href="/messages/delete/${message.id}" class="btn btn-danger">Delete</a>
+					</td>
+					</c:when>
+					<c:otherwise>
+					<td>Sorry, no Actions for you!</td>
+					</c:otherwise>
+					</c:choose>
+				</tr>
+				</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
@@ -90,12 +109,12 @@
 			<h3>No messages yet!</h3>
 		</c:otherwise>
 		</c:choose>
-		<a href="/messages/new" class="btn btn-info my-2">Leave A Message!</a>
+		<c:if test="${member.id!=loggedInUser.id}">
+			<a href="/messages/new" class="btn btn-info my-2">Leave A Message!</a>
+		</c:if>
 		<c:if test="${member.id==loggedInUser.id}">
 			<a href="/members/edit/${member.id}" class="btn btn-warning my-2">Edit Profile</a>
 		</c:if>
-		<a href="/hub">Back to the Hub</a>
-		<a href="/logout">Logout</a>
 	</div>
 </body>
 </html>
