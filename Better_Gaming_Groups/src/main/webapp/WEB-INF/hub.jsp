@@ -14,18 +14,18 @@
 <style>
 	body {background-image: url('/img/hub_bg.png'); background-size: cover; background-repeat: no-repeat;}
 </style>
-<title>The Hub</title>
+<title>Bulletin Board</title>
 </head>
 <body>
 	<div class="d-flex justify-content-end">
-		<a href="/logout" class="btn btn-danger my-2">Logout</a>
+		<a href="/logout" class="btn btn-danger my-2 me-2">Logout</a>
 	</div>
 	<div class="d-flex container flex-column">
 		<div class="container justify-content-center align-items-center flex-column d-flex text-light text-center">
-		<h1>The Hub</h1> 
-		<h2>Welcome in <c:out value="${loggedInUser.screenName}"></c:out>!</h2>
-		<h3>Find some amazing gamers to connect with!</h3>
-		<table class="table table-hover table-info opacity-75">
+		<h1 style="text-decoration: underline;">Welcome to the Bulletin Board</h1> 
+		<h2>Step up to the board, <c:out value="${loggedInUser.screenName}"></c:out>, don't be shy!</h2>
+		<h3>Adventureres, Assassins, Speedsters, Demi-Gods alike; Anyone you can think of can be found here!</h3>
+		<table class="table table-hover table-info opacity-75 table-responsive">
 			<thead>
 				<tr>
 					<th>Screen Name</th>

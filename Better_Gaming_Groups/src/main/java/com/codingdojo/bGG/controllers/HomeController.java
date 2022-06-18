@@ -86,7 +86,7 @@ public class HomeController {
 	@GetMapping("/members/edit/{id}")
 	public String editProfile(@PathVariable("id") Long id, Model model, HttpSession session, User user) {
 		if(session.getAttribute("loggedInUser")!=null) {
-			User profile = (User)session.getAttribute("loggedInUser");
+			User profile = (User)session.getAttribute("currentPage");
 			model.addAttribute("editUser",profile);
 			return "editProfile.jsp";
 		}
