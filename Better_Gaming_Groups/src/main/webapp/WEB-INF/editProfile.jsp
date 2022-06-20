@@ -26,14 +26,14 @@
 				<div class=" form-group row my-3">
 					<form:label path="screenName" class="col-sm-3 col-form-label text-center">Screen Name:</form:label>
 					<div class="col-sm-9">
-						<form:errors path="screenName" class="text-danger"/>
+						<form:errors path="screenName" class="text-warning bg-secondary"/>
 						<form:input path="screenName" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group row">
 					<form:label path="welcomeMsg" class="col-sm-3 col-form-label text-center">Welcome Message:</form:label>
 					<div class="col-sm-9">
-						<form:errors path="welcomeMsg" class="text-danger"/>
+						<form:errors path="welcomeMsg" class="text-warning bg-secondary"/>
 						<form:input path="welcomeMsg" class="form-control"/>
 						
 					</div>
@@ -41,35 +41,35 @@
 				<div class="form-group row my-3">
 					<form:label path="preferredGenre" class="col-sm-3 col-form-label text-center">My Preferred Genre:</form:label>
 					<div class="col-sm-9">
-						<form:errors path="preferredGenre" class="text-danger"/>
+						<form:errors path="preferredGenre" class="text-warning bg-secondary"/>
 						<form:input path="preferredGenre" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group row my-3">
 					<form:label path="favGames" class="col-sm-3 col-form-label text-center">My Favorite Games:</form:label>
 					<div class="col-sm-9">
-						<form:errors path="favGames" class="text-danger"/>
+						<form:errors path="favGames" class="text-warning bg-secondary"/>
 						<form:input path="favGames" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group row my-3">
 					<form:label path="additionalGenres" class="col-sm-3 col-form-label text-center">Other genres I like:</form:label>
 					<div class="col-sm-9">
-						<form:errors path="additionalGenres" class="text-danger"/>
+						<form:errors path="additionalGenres" class="text-warning bg-secondary"/>
 						<form:input path="additionalGenres" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group row my-3">
 					<form:label path="platform" class="col-sm-3 col-form-label text-center">Platforms I play:</form:label>
 					<div class="col-sm-9">
-						<form:errors path="platform" class="text-danger"/>
+						<form:errors path="platform" class="text-warning bg-secondary"/>
 						<form:input path="platform" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group row my-3">
 					<form:label path="aboutMe" class="col-sm-3 col-form-label text-center">About Me:</form:label>
 					<div class="col-sm-9">
-						<form:errors path="aboutMe" class="text-danger"/>
+						<form:errors path="aboutMe" class="text-warning bg-secondary"/>
 						<form:textarea path="aboutMe" class="form-control"/>
 					</div>
 				</div>

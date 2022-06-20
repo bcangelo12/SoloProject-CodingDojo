@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 import com.codingdojo.bGG.models.LoginUser;
 import com.codingdojo.bGG.models.Message;
+import com.codingdojo.bGG.models.UpdatingUser;
 import com.codingdojo.bGG.models.User;
 import com.codingdojo.bGG.services.MessageService;
 import com.codingdojo.bGG.services.UserService;
@@ -72,10 +73,23 @@ public class HomeController {
 	
 	// Member page
 	@GetMapping("/members/{id}")
-	public String showMember(@PathVariable("id") Long id, Model model, HttpSession session) {
+	public String showMember(@PathVariable("id") Long id, Model model, HttpSession session, User user, UpdatingUser updatingUser) {
 		if(session.getAttribute("loggedInUser")!=null) {
-			model.addAttribute("member",userServ.findById(id));
-			session.setAttribute("currentPage", userServ.findById(id));
+//			session.setAttribute("currentPage", userServ.findById(id));
+			User current = userServ.findById(id);
+			
+			updatingUser = new UpdatingUser();
+			updatingUser.setId(current.getId());
+			updatingUser.setScreenName(current.getScreenName());
+			updatingUser.setPreferredGenre(current.getPreferredGenre());
+			updatingUser.setWelcomeMsg(current.getWelcomeMsg());
+			updatingUser.setFavGames(current.getFavGames());
+			updatingUser.setAdditionalGenres(current.getAdditionalGenres());
+			updatingUser.setPlatform(current.getPlatform());
+			updatingUser.setAboutMe(current.getAboutMe());
+			updatingUser.setMessages(current.getMessages());
+			session.setAttribute("currentPage", updatingUser);
+			model.addAttribute("member",updatingUser);
 			model.addAttribute("messages", messageServ.getAllMessages());
 			return "showMember.jsp";
 		}
@@ -84,9 +98,9 @@ public class HomeController {
 	
 	// Edit Profile Page
 	@GetMapping("/members/edit/{id}")
-	public String editProfile(@PathVariable("id") Long id, Model model, HttpSession session, User user) {
+	public String editProfile(@PathVariable("id") Long id, Model model, HttpSession session, UpdatingUser updatingUser) {
 		if(session.getAttribute("loggedInUser")!=null) {
-			User profile = (User)session.getAttribute("currentPage");
+			UpdatingUser profile = (UpdatingUser)session.getAttribute("currentPage");
 			model.addAttribute("editUser",profile);
 			return "editProfile.jsp";
 		}
@@ -95,34 +109,30 @@ public class HomeController {
 	
 	// Update Profile Page
 	@PutMapping("/members/update/{id}")
-	public String updateProfile(@Valid @PathVariable("id") Long id, @ModelAttribute("editUser") User updateUser,  BindingResult result ) {
+	public String updateProfile(@Valid @ModelAttribute("editUser") UpdatingUser updatingUser,  BindingResult result, @PathVariable("id") Long id, Model model, User user) {
 		if(result.hasErrors()) {
 			return "editProfile.jsp";
 		} else {
-			//find user
-			User foundUser = userServ.findById(id);
-			//update fields using request body to found user
-			foundUser.setScreenName(updateUser.getScreenName());
-			foundUser.setWelcomeMsg(updateUser.getWelcomeMsg());
-			foundUser.setPreferredGenre(updateUser.getPreferredGenre());
-			foundUser.setFavGames(updateUser.getFavGames());
-			foundUser.setAdditionalGenres(updateUser.getAdditionalGenres());
-			foundUser.setAboutMe(updateUser.getAboutMe());
-			foundUser.setPlatform(updateUser.getPlatform());
-			// tricking validation with confirm setter, param not stored in database and will not be saved
-			foundUser.setConfirm("secretpassword");
-			userServ.updateUser(foundUser);
+			User almost = userServ.findById(id);
+			almost.setScreenName(updatingUser.getScreenName());
+			almost.setWelcomeMsg(updatingUser.getWelcomeMsg());
+			almost.setPreferredGenre(updatingUser.getPreferredGenre());
+			almost.setFavGames(updatingUser.getFavGames());
+			almost.setAdditionalGenres(updatingUser.getAdditionalGenres());
+			almost.setPlatform(updatingUser.getPlatform());
+			almost.setAboutMe(updatingUser.getAboutMe());
+			userServ.updateUser(almost);
 			return "redirect:/members/{id}";
 		}
 	}
 	
 	// New Message
 	@GetMapping("/messages/new")
-	public String newMessage(@ModelAttribute("message") User user, Message message, HttpSession session, Model model) {
+	public String newMessage(@ModelAttribute("message") User user, UpdatingUser updatingUser, Message message, HttpSession session, Model model) {
 		if(session.getAttribute("loggedInUser")!=null) {
 			User sender = (User)session.getAttribute("loggedInUser");
 			model.addAttribute("user",sender);
-			User receiver = (User)session.getAttribute("currentPage");
+			UpdatingUser receiver = (UpdatingUser)session.getAttribute("currentPage");
 			model.addAttribute("receiver", receiver);
 			model.addAttribute("newMessage", new Message());
 			return "newMessage.jsp";

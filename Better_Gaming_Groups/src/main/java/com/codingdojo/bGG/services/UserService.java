@@ -38,15 +38,24 @@ public class UserService {
 		userRepo.deleteById(id);
 	}
 	
+	public User editPW(User updateUser, BindingResult result) {
+		if(result.hasErrors()) {
+			return null;
+		} else {
+			String hashPW = BCrypt.hashpw(updateUser.getPassword(), BCrypt.gensalt());
+			updateUser.setPassword(hashPW);
+			return userRepo.save(updateUser);
+		}
+	}
 	
 	// Login/Reg methods
 	public User register(User newUser, BindingResult result) {
 		if(userRepo.findByEmail(newUser.getEmail())!=null) {
 			result.rejectValue("email", "Unique", "Email is already in use, please try another!");
 		}
-		if(!newUser.getPassword().equals(newUser.getConfirm())) {
-			result.rejectValue("confirm", "Mismatch", "Confirmation password must match password!");
-		}
+//		if(!newUser.getPassword().equals(newUser.getConfirm())) {
+//			result.rejectValue("confirm", "Mismatch", "Confirmation password must match password!");
+//		}
 		if(result.hasErrors()) {
 			return null;
 		} else {

@@ -24,7 +24,7 @@
 		<h1>Edit Your Message!</h1>
 			<form:form action="/messages/update/${editMessage.id}" method="put" modelAttribute="editMessage" class="form-group">
 				<form:label path="content">Message Content:</form:label>
-				<form:errors path="content" class="text-danger"/>
+				<form:errors path="content" class="text-warning bg-secondary"/>
 				<form:input path="content" class="form-control"/>
 				<form:input type="hidden" path="user" value="${user.id}" class="form-control"/>
 				<form:input type="hidden" path="receiver" value="${receiver.id}" class="form-control"/>
