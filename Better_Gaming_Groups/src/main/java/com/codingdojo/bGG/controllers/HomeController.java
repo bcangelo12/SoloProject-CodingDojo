@@ -75,9 +75,7 @@ public class HomeController {
 	@GetMapping("/members/{id}")
 	public String showMember(@PathVariable("id") Long id, Model model, HttpSession session, User user, UpdatingUser updatingUser) {
 		if(session.getAttribute("loggedInUser")!=null) {
-//			session.setAttribute("currentPage", userServ.findById(id));
 			User current = userServ.findById(id);
-			
 			updatingUser = new UpdatingUser();
 			updatingUser.setId(current.getId());
 			updatingUser.setScreenName(current.getScreenName());
@@ -142,18 +140,19 @@ public class HomeController {
 	
 	// Create Message
 	@PostMapping("/create/message")
-	public String createMessage(@Valid @ModelAttribute("newMessage") Message newMessage, BindingResult result, Model model) {
+	public String createMessage(@Valid @ModelAttribute("newMessage") Message newMessage, BindingResult result, Model model, UpdatingUser updatingUser, HttpSession session) {
 		if(result.hasErrors()) {
 			return "newMessage.jsp";
 		} else {
+			UpdatingUser current = (UpdatingUser)session.getAttribute("currentPage");
 			messageServ.createMessage(newMessage);
-			return "redirect:/hub";
+			return "redirect:/members/" + current.getId();
 		}
 	}
 	
 	// Edit Message
 	@GetMapping("messages/edit/{id}")
-	public String editMessage(@PathVariable("id") Long id, Model model, HttpSession session, Message message) {
+	public String editMessage(@PathVariable("id") Long id, Model model, HttpSession session, Message message, UpdatingUser updatingUser) {
 		if(session.getAttribute("loggedInUser")!=null) {
 			Message editMessage = messageServ.getMessage(id);
 			User user = (User)session.getAttribute("loggedInUser");
@@ -161,32 +160,36 @@ public class HomeController {
 				model.addAttribute("editMessage",editMessage);
 				return "editMessage.jsp";
 			} else {
-				return "redirect:/hub";
+				UpdatingUser current = (UpdatingUser)session.getAttribute("currentPage");
+				return "redirect:/members/" + current.getId();
 			}
 		}
 		return "redirect:/";
 	}
 	// Update Message
 	@PutMapping("/messages/update/{id}")
-	public String updateMessage(@Valid @ModelAttribute("editMessage") Message updateMessage, BindingResult result) {
+	public String updateMessage(@Valid @ModelAttribute("editMessage") Message updateMessage, BindingResult result, UpdatingUser updatingUser, HttpSession session) {
 		if(result.hasErrors()) {
 			return "editMessage.jsp";
 		} else {
+			UpdatingUser current = (UpdatingUser)session.getAttribute("currentPage");
 			messageServ.updateMessage(updateMessage);
-			return "redirect:/hub";
+			return "redirect:/members/" + current.getId();
 		}
 	}
 	// Delete Message
 	@GetMapping("/messages/delete/{id}")
-	public String deleteMessage(@PathVariable("id") Long id, HttpSession session, Message message) {
+	public String deleteMessage(@PathVariable("id") Long id, HttpSession session, Message message, UpdatingUser updatingUser) {
 		if(session.getAttribute("loggedInUser")!=null) {
 			Message checkMessage = messageServ.getMessage(id);
 			User user = (User)session.getAttribute("loggedInUser");
 			if(user.getId()==(checkMessage.getUser().getId())) {
+				UpdatingUser current = (UpdatingUser)session.getAttribute("currentPage");
 				messageServ.deleteMessage(id);
-				return "redirect:/hub";
+				return "redirect:/members/" + current.getId();
 			} else {
-				return "redirect:/hub";
+				UpdatingUser current = (UpdatingUser)session.getAttribute("currentPage");
+				return "redirect:/members/" + current.getId();
 			}
 		}
 		return "redirect:/";

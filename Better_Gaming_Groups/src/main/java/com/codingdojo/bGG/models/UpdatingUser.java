@@ -26,7 +26,8 @@ public class UpdatingUser {
 	@NotEmpty(message="A preferred gaming genre is needed!")
 	private String preferredGenre;
 	
-	@Size(min=4,max=50,message="When editing your Profile Welcome Message, please include at least 4 characters!")
+	@Size(min=4,message="When editing your Profile Welcome Message, please include at least 4 characters!")
+	@Size(max=100,message="Try to keep your Profile Welcome Message a bit shorter! (Less than 50 characters)")
 	private String welcomeMsg;
 	
 	@Size(min=3,message="Please include one of your favorite games!")

@@ -24,13 +24,13 @@
 		<div class="container justify-content-center align-items-center flex-column d-flex text-light text-center">
 		<h1 style="text-decoration: underline;">Welcome to the Bulletin Board</h1> 
 		<h2>Step up to the board, <c:out value="${loggedInUser.screenName}"></c:out>, don't be shy!</h2>
-		<h3>Adventureres, Assassins, Speedsters, Demi-Gods alike; Anyone you can think of can be found here!</h3>
+		<h3 class="text-info bg-secondary">Adventureres, Assassins, Speedsters, Demi-Gods alike; Anyone you can think of can be found here!</h3>
 		<table class="table table-hover table-info opacity-75 table-responsive">
 			<thead>
 				<tr>
 					<th>Screen Name</th>
 					<th>Preferred Genre</th>
-					<th>About Them</th>
+					<th>Welcome Message</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,7 +38,7 @@
 				<tr>
 					<td><a class="text-danger" href="/members/${member.id}">${member.screenName}</a></td>
 					<td>${member.preferredGenre}</td>
-					<td>${member.aboutMe}</td>
+					<td class="w-50">${member.welcomeMsg}</td>
 				</tr>
 				</c:forEach>	
 			</tbody>

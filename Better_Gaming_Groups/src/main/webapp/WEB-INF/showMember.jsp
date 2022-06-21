@@ -70,7 +70,7 @@
 		<c:choose>
 		<c:when test="${member.aboutMe!=null}">
 			<h3 style="text-decoration: underline;">About Me!</h3>
-			<h4 class="mb-5">${member.aboutMe}</h4>
+			<h4 class="mb-5 bg-secondary">${member.aboutMe}</h4>
 		</c:when>
 		<c:otherwise>
 			<h3 style="text-decoration: underline;">About Me! Just give me some time, I'll be sure to change this!</h3>
@@ -79,7 +79,7 @@
 		<c:choose>
 		<c:when test="${member.messages!=null}">
 		<h3>Messages left by friendly people!</h3>
-		<table class="table table-hover table-info table-bordered text-center">
+		<table class="table table-hover table-info table-bordered text-center align-items-center justify-content-center">
 			<thead>
 				<tr>
 					<th>Message</th>
@@ -92,10 +92,10 @@
 				<c:if test="${member.id==message.receiver}">
 				<tr>
 					<td>${message.content}</td>
-					<td>${message.user.screenName}</td>
+					<td class="w-25">${message.user.screenName}</td>
 					<c:choose>
 					<c:when test="${loggedInUser.id==message.user.id}">
-					<td>
+					<td class="w-25">
 						<a href="/messages/edit/${message.id}" class="btn btn-warning mx-2">Edit</a>
 						<a href="/messages/delete/${message.id}" class="btn btn-danger">Delete</a>
 					</td>
